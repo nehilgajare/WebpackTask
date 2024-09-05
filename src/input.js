@@ -1,5 +1,5 @@
-const x = (x,y) => x*y;
-console.log(x(2,5));
+const multiply = (x,y) => x*y;
+console.log(multiply(2,5));
 
 const person = {
     firstName:"John",

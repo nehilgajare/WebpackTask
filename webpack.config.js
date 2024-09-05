@@ -1,11 +1,12 @@
 const path = require("path");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
+  mode: 'development', // Add this line
   entry: "./src/input.js",
   output: {
     filename: "bundle.min.js",
-    path: path.resolve(__dirname, "dist"), 
+    path: path.resolve(__dirname, "dist"),
   },
   module: {
     rules: [
@@ -15,15 +16,14 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["env"],
+            presets: ["@babel/preset-env"],
           },
         },
       },
     ],
   },
-  plugins: [
-    new UglifyJsPlugin({
-      sourceMap: true, // Set to false if you don't need source maps
-    }),
-  ],
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
 };
